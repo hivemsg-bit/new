@@ -46,18 +46,6 @@
             transform: translateY(-10px);
         }
         
-        .pricing-card.free {
-            border-top: 5px solid #6c757d;
-        }
-        
-        .pricing-card.basic {
-            border-top: 5px solid #007bff;
-        }
-        
-        .pricing-card.premium {
-            border-top: 5px solid #28a745;
-        }
-        
         .btn-yellow {
             background-color: var(--primary-yellow);
             color: #000;
@@ -88,21 +76,9 @@
             border-bottom: 1px solid #eee;
         }
         
-        .subject-list li:last-child {
-            border-bottom: none;
-        }
-        
         .faq-section {
             background-color: var(--light-yellow);
             padding: 60px 0;
-        }
-        
-        .admin-section {
-            background-color: #f8f9fa;
-            border-left: 5px solid var(--primary-yellow);
-            padding: 20px;
-            margin-top: 30px;
-            display: none;
         }
         
         footer {
@@ -148,9 +124,40 @@
             font-weight: bold;
             color: var(--primary-yellow);
         }
+        
+        .alert-section {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+            min-width: 300px;
+        }
+        
+        .debug-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-width: 300px;
+        }
     </style>
 </head>
 <body>
+    <!-- Alert Section -->
+    <div class="alert-section"></div>
+
+    <!-- Debug Panel -->
+    <div class="debug-panel">
+        <h6>Debug Info</h6>
+        <div id="debugInfo">Status: Ready</div>
+        <button class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleDebug()">Toggle Debug</button>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
@@ -188,7 +195,7 @@
     <section class="hero-section">
         <div class="container">
             <h1 class="display-4 fw-bold mb-4">Prepare for CA Exams with Confidence</h1>
-            <p class="lead mb-4">Comprehensive test series, detailed study materials, and expert guidance for CA Foundation, Intermediate, and Final exams</p>
+            <p class="lead mb-4">Comprehensive test series, detailed study materials and expert guidance for CA Foundation, Intermediate, and Final exams</p>
             <a href="#pricing" class="btn btn-yellow btn-lg px-5 py-3">View Plans <i class="fas fa-arrow-right ms-2"></i></a>
         </div>
     </section>
@@ -204,7 +211,7 @@
             <div class="row">
                 <!-- Free Plan -->
                 <div class="col-md-4 mb-4">
-                    <div class="card pricing-card free h-100" data-bs-toggle="modal" data-bs-target="#paymentModal" data-plan="Free">
+                    <div class="card pricing-card h-100">
                         <div class="card-body text-center p-4">
                             <h5 class="card-title">Free</h5>
                             <h3 class="fw-bold my-4">₹0</h3>
@@ -223,7 +230,7 @@
                 
                 <!-- Basic Plan -->
                 <div class="col-md-4 mb-4">
-                    <div class="card pricing-card basic h-100" data-bs-toggle="modal" data-bs-target="#paymentModal" data-plan="Basic">
+                    <div class="card pricing-card h-100">
                         <div class="card-body text-center p-4">
                             <span class="badge bg-primary position-absolute top-0 end-0 m-3">Popular</span>
                             <h5 class="card-title">Basic</h5>
@@ -243,7 +250,7 @@
                 
                 <!-- Premium Plan -->
                 <div class="col-md-4 mb-4">
-                    <div class="card pricing-card premium h-100" data-bs-toggle="modal" data-bs-target="#paymentModal" data-plan="Premium">
+                    <div class="card pricing-card h-100">
                         <div class="card-body text-center p-4">
                             <h5 class="card-title">Premium</h5>
                             <h3 class="fw-bold my-4">₹2999</h3>
@@ -263,345 +270,7 @@
         </div>
     </section>
 
-    <!-- Subject Lists -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Subjects Covered</h2>
-                <p class="lead text-muted">Comprehensive coverage of all CA exam subjects</p>
-            </div>
-            
-            <div class="row">
-                <!-- CA Foundation -->
-                <div class="col-md-4 mb-4" id="ca-foundation">
-                    <div class="card h-100">
-                        <div class="card-header bg-dark text-white text-center">
-                            <h5 class="mb-0">CA Foundation</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul class="subject-list">
-                                <li><i class="fas fa-book me-2 text-primary"></i> Principles and Practice of Accounting</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Business Laws and Business Correspondence</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Business Mathematics and Logical Reasoning</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Business Economics and Business Commercial Knowledge</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- CA Intermediate -->
-                <div class="col-md-4 mb-4" id="ca-intermediate">
-                    <div class="card h-100">
-                        <div class="card-header bg-dark text-white text-center">
-                            <h5 class="mb-0">CA Intermediate</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul class="subject-list">
-                                <li><i class="fas fa-book me-2 text-primary"></i> Accounting</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Corporate Laws and Other Laws</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Cost and Management Accounting</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Taxation</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Advanced Accounting</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Auditing and Assurance</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- CA Final -->
-                <div class="col-md-4 mb-4" id="ca-final">
-                    <div class="card h-100">
-                        <div class="card-header bg-dark text-white text-center">
-                            <h5 class="mb-0">CA Final</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul class="subject-list">
-                                <li><i class="fas fa-book me-2 text-primary"></i> Financial Reporting</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Strategic Financial Management</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Advanced Auditing and Professional Ethics</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Corporate and Economic Laws</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Strategic Cost Management</li>
-                                <li><i class="fas fa-book me-2 text-primary"></i> Elective Paper</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Money Back Plan -->
-    <section id="money-back" class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="fw-bold mb-4">Money Back Guarantee</h2>
-                    <p class="lead">We're confident in our test series quality. If you complete our entire test series and still don't pass your exam, we'll refund your money.</p>
-                    <div class="d-flex mb-3">
-                        <div class="me-4">
-                            <i class="fas fa-check-circle fa-2x text-success"></i>
-                        </div>
-                        <div>
-                            <h5>Terms & Conditions</h5>
-                            <p>You must attempt all tests and score above 60% in each test to be eligible for the money-back guarantee.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <div class="me-4">
-                            <i class="fas fa-check-circle fa-2x text-success"></i>
-                        </div>
-                        <div>
-                            <h5>How to Claim</h5>
-                            <p>Submit your exam results within 30 days of declaration along with your test series performance report.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Money Back Guarantee" class="img-fluid rounded">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">What Students Say About Us</h2>
-                <p class="lead text-muted">Hear from our successful students</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <h5 class="mb-1">Rahul Sharma</h5>
-                            <p class="text-muted mb-3">CA Foundation Student</p>
-                            <p class="mb-0">"The test series was incredibly helpful. The questions were exactly what I needed to practice, and the detailed solutions helped me understand my mistakes."</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 mb-4">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <h5 class="mb-1">Priya Patel</h5>
-                            <p class="text-muted mb-3">CA Intermediate Student</p>
-                            <p class="mb-0">"The study material is comprehensive and well-organized. I especially appreciated the performance analytics that helped me identify my weak areas."</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 mb-4">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <h5 class="mb-1">Amit Kumar</h5>
-                            <p class="text-muted mb-3">CA Final Student</p>
-                            <p class="mb-0">"The premium plan was worth every rupee. The video solutions and advanced analytics gave me the edge I needed to pass my exams."</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 mb-4">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <h5 class="mb-1">Neha Gupta</h5>
-                            <p class="text-muted mb-3">CA Foundation Student</p>
-                            <p class="mb-0">"I started with the free plan and was so impressed that I upgraded to the basic plan. The money-back guarantee gave me confidence in their services."</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 mb-4 mx-auto">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <h5 class="mb-1">Sanjay Mehta</h5>
-                            <p class="text-muted mb-3">CA Intermediate Student</p>
-                            <p class="mb-0">"The UPI payment process was so simple, and I received my study materials on WhatsApp within minutes. Great service!"</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="faq-section py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Frequently Asked Questions</h2>
-                <p class="lead">Everything you need to know about our test series</p>
-            </div>
-            
-            <div class="accordion" id="faqAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                            How do I access the test series after purchasing?
-                        </button>
-                    </h2>
-                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            After completing your purchase, you'll receive login credentials via email. You can use these to access your dashboard where all test series and study materials are available.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                            Can I download the question papers?
-                        </button>
-                    </h2>
-                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Yes, all question papers are available for download in PDF format. You can either attempt them online or download for offline practice.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                            How often are new tests added?
-                        </button>
-                    </h2>
-                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            We add new tests every month based on the latest exam patterns and syllabus changes. All existing customers get access to new tests at no additional cost.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                            What is the validity of the test series?
-                        </button>
-                    </h2>
-                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            The test series is valid for one year from the date of purchase. This gives you ample time to complete all tests and revisions.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5 class="fw-bold">CA Exam Prep</h5>
-                    <p>Providing high-quality test series and study materials for CA aspirants since 2023.</p>
-                    <div class="d-flex">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h5 class="fw-bold">Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
-                        <li class="mb-2"><a href="#pricing" class="text-white text-decoration-none">Pricing</a></li>
-                        <li class="mb-2"><a href="#testimonials" class="text-white text-decoration-none">Testimonials</a></li>
-                        <li class="mb-2"><a href="#faq" class="text-white text-decoration-none">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 class="fw-bold">Test Series</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#ca-foundation" class="text-white text-decoration-none">CA Foundation</a></li>
-                        <li class="mb-2"><a href="#ca-intermediate" class="text-white text-decoration-none">CA Intermediate</a></li>
-                        <li class="mb-2"><a href="#ca-final" class="text-white text-decoration-none">CA Final</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 mb-4">
-                    <h5 class="fw-bold">Contact Us</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@caexamprep.com</li>
-                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +91 9876543210</li>
-                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Mumbai, India</li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="mt-0 mb-4 bg-light">
-            <div class="text-center">
-                <p class="mb-0">&copy; 2023 CA Exam Prep. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Payment Modal -->
-    <div class="modal fade" id="paymentModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Complete Your Purchase</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h4 class="text-center mb-4">Pay via UPI - ₹<span id="planPrice">199</span> for <span id="planName">Basic</span> Plan</h4>
-                    
-                    <div class="payment-steps">
-                        <h5 class="mb-4">How to complete your purchase:</h5>
-                        <div class="d-flex mb-3">
-                            <div>
-                                <span class="step-number">1</span>
-                            </div>
-                            <div>
-                                <p class="mb-0">Make payment of ₹<span id="stepPrice">199</span> via UPI to our ID: <strong>caexamprep@upi</strong></p>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <div>
-                                <span class="step-number">2</span>
-                            </div>
-                            <div>
-                                <p class="mb-0">Take a screenshot of the successful payment</p>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <div>
-                                <span class="step-number">3</span>
-                            </div>
-                            <div>
-                                <p class="mb-0">WhatsApp the screenshot to <strong>+91 9876543210</strong> along with your name and email address</p>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div>
-                                <span class="step-number">4</span>
-                            </div>
-                            <div>
-                                <p class="mb-0">We will send all study materials to your WhatsApp/email within 24 hours</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <h5 class="mb-3">For ₹199 Plan - Performance Evaluation</h5>
-                        <p>After receiving the materials, you can send us your exam papers. Our experts will evaluate them and provide detailed performance feedback.</p>
-                    </div>
-                    
-                    <div class="text-center mt-4">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=caexamprep@upi&pn=CA%20Exam%20Prep&am=199&cu=INR" alt="UPI QR Code" class="img-fluid mb-3" id="qrCode">
-                        <p class="text-muted">Scan this QR code to pay instantly</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">I've Completed Payment</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Register Modal -->
+    <!-- Registration Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -666,31 +335,44 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Google Apps Script URL - इसे आपको अपने deployed web app के URL से replace करना होगा
+        // Google Apps Script URL - इसे अपने deployed web app के URL से replace करें
         const scriptURL = 'https://script.google.com/macros/s/AKfycbw1OO4Xq2pDS_uBxj1KMNfJakhW_RC9nXKl-bWv_cRi9u41Q4IA6VEZuFDw1Gw7fHkoWg/exec';
+        let debugMode = true;
+        
+        // Show alert function
+        function showAlert(message, type = 'success') {
+            const alertSection = document.querySelector('.alert-section');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertSection.appendChild(alert);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+        
+        // Update debug info
+        function updateDebugInfo(message) {
+            if (debugMode) {
+                document.getElementById('debugInfo').innerHTML = message;
+                console.log(message);
+            }
+        }
+        
+        // Toggle debug mode
+        function toggleDebug() {
+            debugMode = !debugMode;
+            document.querySelector('.debug-panel').style.display = debugMode ? 'block' : 'none';
+            updateDebugInfo('Debug mode: ' + (debugMode ? 'ON' : 'OFF'));
+        }
         
         document.addEventListener('DOMContentLoaded', function() {
-            // Payment modal functionality
-            const paymentModal = document.getElementById('paymentModal');
-            paymentModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const plan = button.getAttribute('data-plan');
-                const planName = document.getElementById('planName');
-                const planPrice = document.getElementById('planPrice');
-                const stepPrice = document.getElementById('stepPrice');
-                const qrCode = document.getElementById('qrCode');
-                
-                let price = "0";
-                if (plan === "Basic") price = "199";
-                if (plan === "Premium") price = "2999";
-                
-                planName.textContent = plan;
-                planPrice.textContent = price;
-                stepPrice.textContent = price;
-                
-                // Update QR code with the correct amount
-                qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=caexamprep@upi&pn=CA%20Exam%20Prep&am=${price}&cu=INR`;
-            });
+            updateDebugInfo('Page loaded successfully');
             
             // Registration Form Handling
             const registrationForm = document.getElementById('registrationForm');
@@ -701,6 +383,18 @@
             
             let otpTimer;
             let userData = {};
+            let currentOtp = ''; // For debugging
+            
+            // Test Google Apps Script connection
+            fetch(scriptURL + '?test=true')
+                .then(response => response.json())
+                .then(data => {
+                    updateDebugInfo('API Connection: Successful');
+                })
+                .catch(error => {
+                    updateDebugInfo('API Connection: Failed - ' + error.message);
+                    showAlert('Could not connect to server. Please check your internet connection.', 'danger');
+                });
             
             // Registration form submission
             registrationForm.addEventListener('submit', async function(e) {
@@ -715,7 +409,14 @@
                     timestamp: new Date().toISOString()
                 };
                 
+                updateDebugInfo('Sending registration data: ' + JSON.stringify(userData));
+                
                 try {
+                    // Show loading state
+                    const submitBtn = registrationForm.querySelector('button[type="submit"]');
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+                    submitBtn.disabled = true;
+                    
                     // Send data to Google Sheets
                     const response = await fetch(scriptURL, {
                         method: 'POST',
@@ -729,33 +430,54 @@
                     });
                     
                     const result = await response.json();
+                    updateDebugInfo('Server response: ' + JSON.stringify(result));
                     
                     if (result.status === 'success') {
                         // Show OTP section
                         registrationForm.style.display = 'none';
                         otpSection.style.display = 'block';
                         
+                        // For debugging, show the OTP
+                        if (result.otp) {
+                            currentOtp = result.otp;
+                            updateDebugInfo('OTP generated: ' + currentOtp);
+                            showAlert('OTP for testing: ' + currentOtp, 'info');
+                        }
+                        
                         // Start OTP countdown
                         startOtpCountdown();
+                        
+                        showAlert('OTP sent to your email successfully!', 'success');
                     } else {
-                        alert('Registration failed: ' + result.message);
+                        showAlert('Registration failed: ' + result.message, 'danger');
                     }
                 } catch (error) {
                     console.error('Error!', error.message);
-                    alert('An error occurred. Please try again.');
+                    updateDebugInfo('Error: ' + error.message);
+                    showAlert('An error occurred. Please try again.', 'danger');
+                } finally {
+                    // Reset button state
+                    const submitBtn = registrationForm.querySelector('button[type="submit"]');
+                    submitBtn.innerHTML = 'Register';
+                    submitBtn.disabled = false;
                 }
             });
             
             // Verify OTP
             verifyOtpBtn.addEventListener('click', async function() {
                 const otp = document.getElementById('otpInput').value;
+                updateDebugInfo('Verifying OTP: ' + otp);
                 
                 if (!otp || otp.length !== 6) {
-                    alert('Please enter a valid 6-digit OTP');
+                    showAlert('Please enter a valid 6-digit OTP', 'warning');
                     return;
                 }
                 
                 try {
+                    // Show loading state
+                    verifyOtpBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Verifying...';
+                    verifyOtpBtn.disabled = true;
+                    
                     const response = await fetch(scriptURL, {
                         method: 'POST',
                         headers: {
@@ -769,23 +491,39 @@
                     });
                     
                     const result = await response.json();
+                    updateDebugInfo('OTP verification response: ' + JSON.stringify(result));
                     
                     if (result.status === 'success') {
                         clearInterval(otpTimer);
-                        alert('Registration successful! You can now login.');
-                        window.location.reload();
+                        showAlert('Registration successful! You can now login.', 'success');
+                        
+                        // Close modal after 2 seconds
+                        setTimeout(() => {
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+                            modal.hide();
+                            window.location.reload();
+                        }, 2000);
                     } else {
-                        alert('OTP verification failed: ' + result.message);
+                        showAlert('OTP verification failed: ' + result.message, 'danger');
                     }
                 } catch (error) {
                     console.error('Error!', error.message);
-                    alert('An error occurred. Please try again.');
+                    updateDebugInfo('Error: ' + error.message);
+                    showAlert('An error occurred. Please try again.', 'danger');
+                } finally {
+                    // Reset button state
+                    verifyOtpBtn.innerHTML = 'Verify OTP';
+                    verifyOtpBtn.disabled = false;
                 }
             });
             
             // Resend OTP
             resendOtpBtn.addEventListener('click', async function() {
                 try {
+                    // Show loading state
+                    resendOtpBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+                    resendOtpBtn.disabled = true;
+                    
                     const response = await fetch(scriptURL, {
                         method: 'POST',
                         headers: {
@@ -798,16 +536,29 @@
                     });
                     
                     const result = await response.json();
+                    updateDebugInfo('Resend OTP response: ' + JSON.stringify(result));
                     
                     if (result.status === 'success') {
-                        alert('New OTP sent to your email');
+                        // For debugging, show the OTP
+                        if (result.otp) {
+                            currentOtp = result.otp;
+                            updateDebugInfo('New OTP generated: ' + currentOtp);
+                            showAlert('New OTP for testing: ' + currentOtp, 'info');
+                        }
+                        
+                        showAlert('New OTP sent to your email', 'success');
                         startOtpCountdown();
                     } else {
-                        alert('Failed to resend OTP: ' + result.message);
+                        showAlert('Failed to resend OTP: ' + result.message, 'danger');
                     }
                 } catch (error) {
                     console.error('Error!', error.message);
-                    alert('An error occurred. Please try again.');
+                    updateDebugInfo('Error: ' + error.message);
+                    showAlert('An error occurred. Please try again.', 'danger');
+                } finally {
+                    // Reset button state
+                    resendOtpBtn.innerHTML = 'Resend OTP';
+                    resendOtpBtn.disabled = false;
                 }
             });
             
@@ -816,20 +567,25 @@
                 let timeLeft = 300; // 5 minutes
                 
                 clearInterval(otpTimer);
+                updateCountdownDisplay(timeLeft);
+                
                 otpTimer = setInterval(() => {
                     timeLeft--;
                     
                     if (timeLeft <= 0) {
                         clearInterval(otpTimer);
-                        otpCountdown.textContent = '00:00';
-                        alert('OTP has expired. Please request a new one.');
+                        showAlert('OTP has expired. Please request a new one.', 'warning');
                         return;
                     }
                     
-                    const minutes = Math.floor(timeLeft / 60);
-                    const seconds = timeLeft % 60;
-                    otpCountdown.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    updateCountdownDisplay(timeLeft);
                 }, 1000);
+            }
+            
+            function updateCountdownDisplay(timeLeft) {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                otpCountdown.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }
         });
     </script>
