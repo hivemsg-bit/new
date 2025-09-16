@@ -1,593 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CA Exam Prep - Test Series & Study Materials</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-yellow: #FFD700;
-            --secondary-yellow: #FFE44D;
-            --dark-yellow: #E6C200;
-            --light-yellow: #FFF9C2;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-        }
-        
-        .navbar {
-            background-color: var(--primary-yellow);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-        }
-        
-        .pricing-card {
-            border: none;
-            border-radius: 10px;
-            transition: transform 0.3s;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            cursor: pointer;
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .btn-yellow {
-            background-color: var(--primary-yellow);
-            color: #000;
-            font-weight: 600;
-            border: none;
-        }
-        
-        .btn-yellow:hover {
-            background-color: var(--dark-yellow);
-            color: #000;
-        }
-        
-        .testimonial-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .subject-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .subject-list li {
-            padding: 5px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .faq-section {
-            background-color: var(--light-yellow);
-            padding: 60px 0;
-        }
-        
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 40px 0;
-        }
-        
-        .payment-steps {
-            background-color: var(--light-yellow);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        
-        .step-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background-color: var(--primary-yellow);
-            color: #000;
-            text-align: center;
-            border-radius: 50%;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-        
-        .testimonial-content {
-            padding-left: 10px;
-            border-left: 3px solid var(--primary-yellow);
-        }
-        
-        .otp-section {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            border-left: 4px solid var(--primary-yellow);
-        }
-        
-        .countdown {
-            font-weight: bold;
-            color: var(--primary-yellow);
-        }
-        
-        .alert-section {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1050;
-            min-width: 300px;
-        }
-        
-        .debug-panel {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-            max-width: 300px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAMaster - Best CA Test Series for ICAI 2025</title>
+  <meta name="description" content="ICAI CA Foundation, Intermediate & Final mock tests with AI recommendations and analytics for 2025 exams.">
+  <meta name="keywords" content="CA test series 2025, CA Foundation mock tests, CA Intermediate online, ICAI CA preparation, CA Final series">
+  <link rel="canonical" href="https://camaster.com/">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Schema Markup for CA Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CAMaster",
+    "url": "https://camaster.com",
+    "description": "Online test series for ICAI CA exams"
+  }
+  </script>
 </head>
 <body>
-    <!-- Alert Section -->
-    <div class="alert-section"></div>
-
-    <!-- Debug Panel -->
-    <div class="debug-panel">
-        <h6>Debug Info</h6>
-        <div id="debugInfo">Status: Ready</div>
-        <button class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleDebug()">Toggle Debug</button>
-    </div>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-graduation-cap me-2"></i>CA Exam Prep
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="testSeriesDropdown" role="button" data-bs-toggle="dropdown">
-                            Test Series
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#ca-foundation">CA Foundation</a></li>
-                            <li><a class="dropdown-item" href="#ca-intermediate">CA Intermediate</a></li>
-                            <li><a class="dropdown-item" href="#ca-final">CA Final</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#money-back">Money Back Plan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-                </ul>
-                <div class="d-flex">
-                    <a href="#register" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a>
-                </div>
-            </div>
-        </div>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="test-series.html">Test Series</a></li>
+        <li><a href="free-mock.html">Free Resources</a></li>
+        <li><a href="results-dashboard.html">Results & Analytics</a></li>
+        <li><a href="blog-listing.html">Blog</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button id="login-btn">Login/Register</button></li>
+      </ul>
+      <button id="dark-toggle">🌙</button>
+      <button id="lang-toggle">EN / हिं</button>
     </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-4">Prepare for CA Exams with Confidence</h1>
-            <p class="lead mb-4">Comprehensive test series, detailed study materials and expert guidance for CA Foundation, Intermediate, and Final exams</p>
-            <a href="#pricing" class="btn btn-yellow btn-lg px-5 py-3">View Plans <i class="fas fa-arrow-right ms-2"></i></a>
-        </div>
+  <main>
+    <!-- Hero Section (CA-Focused) -->
+    <section class="hero">
+      <div>
+        <h1 class="english">Master CA Exams with AI-Powered Test Series</h1>
+        <h1 class="hindi">AI-संचालित टेस्ट सीरीज़ के साथ CA परीक्षाओं में महारत हासिल करें</h1>
+        <p class="english">Prepare for ICAI CA Foundation, Intermediate & Final 2025 with 500+ mocks.</p>
+        <p class="hindi">ICAI CA फाउंडेशन, इंटरमीडिएट और फाइनल 2025 के लिए 500+ मॉक टेस्ट के साथ तैयारी करें।</p>
+        <a href="test-series.html" class="cta">Start CA Free Mock</a>
+      </div>
     </section>
 
-    <!-- Pricing Plans -->
-    <section id="pricing" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Our Exam Preparation Plans</h2>
-                <p class="lead text-muted">Choose the plan that works best for your preparation needs</p>
-            </div>
-            
-            <div class="row">
-                <!-- Free Plan -->
-                <div class="col-md-4 mb-4">
-                    <div class="card pricing-card h-100">
-                        <div class="card-body text-center p-4">
-                            <h5 class="card-title">Free</h5>
-                            <h3 class="fw-bold my-4">₹0</h3>
-                            <p class="text-muted">Basic access to get you started</p>
-                            <ul class="list-unstyled my-4">
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 1 Subject Access</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 5 Practice Tests</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Basic Study Material</li>
-                                <li class="mb-2"><i class="fas fa-times-circle text-secondary me-2"></i> Detailed Solutions</li>
-                                <li class="mb-2"><i class="fas fa-times-circle text-secondary me-2"></i> Performance Analytics</li>
-                            </ul>
-                            <div class="btn btn-outline-secondary w-100">Get Started</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Basic Plan -->
-                <div class="col-md-4 mb-4">
-                    <div class="card pricing-card h-100">
-                        <div class="card-body text-center p-4">
-                            <span class="badge bg-primary position-absolute top-0 end-0 m-3">Popular</span>
-                            <h5 class="card-title">Basic</h5>
-                            <h3 class="fw-bold my-4">₹199</h3>
-                            <p class="text-muted">Comprehensive preparation package</p>
-                            <ul class="list-unstyled my-4">
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> All Subjects Access</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 20 Practice Tests</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Detailed Study Material</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Question-wise Solutions</li>
-                                <li class="mb-2"><i class="fas fa-times-circle text-secondary me-2"></i> Performance Analytics</li>
-                            </ul>
-                            <div class="btn btn-yellow w-100">Choose Plan</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Premium Plan -->
-                <div class="col-md-4 mb-4">
-                    <div class="card pricing-card h-100">
-                        <div class="card-body text-center p-4">
-                            <h5 class="card-title">Premium</h5>
-                            <h3 class="fw-bold my-4">₹2999</h3>
-                            <p class="text-muted">Complete preparation with advanced features</p>
-                            <ul class="list-unstyled my-4">
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> All Subjects Access</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 50+ Practice Tests</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Premium Study Material</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Video Solutions</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Advanced Performance Analytics</li>
-                            </ul>
-                            <div class="btn btn-yellow w-100">Choose Plan</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Features (CA-Specific) -->
+    <section class="features">
+      <h2 class="english">CA Key Features</h2><h2 class="hindi">CA मुख्य विशेषताएँ</h2>
+      <div class="card english">AI Recommendations for CA Modules (e.g., Auditing)</div>
+      <div class="card hindi">CA मॉड्यूल के लिए AI सिफारिशें (जैसे, ऑडिटिंग)</div>
+      <div class="card">ICAI-Pattern Live Scorecards & Rank Prediction</div>
+      <div class="card">Razorpay for CA Packages (₹499+)</div>
+      <div class="card">Mobile-Optimized for On-the-Go CA Prep</div>
+      <div class="card">Bilingual (Hindi/English) for CA Students</div>
     </section>
 
-    <!-- Registration Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create an Account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="registrationForm">
-                        <div class="mb-3">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="fullName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Select Course</label>
-                            <select class="form-select" id="course" required>
-                                <option value="">Choose course</option>
-                                <option>CA Foundation</option>
-                                <option>CA Intermediate</option>
-                                <option>CA Final</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="termsCheck" required>
-                            <label class="form-check-label" for="termsCheck">I agree to the terms and conditions</label>
-                        </div>
-                        <button type="submit" class="btn btn-yellow w-100">Register</button>
-                    </form>
-                    
-                    <!-- OTP Verification Section -->
-                    <div class="otp-section" id="otpSection">
-                        <h6>OTP Verification</h6>
-                        <p>We've sent an OTP to your email. Please check your inbox.</p>
-                        <div class="mb-3">
-                            <label class="form-label">Enter OTP</label>
-                            <input type="text" class="form-control" id="otpInput" placeholder="Enter 6-digit OTP">
-                            <div class="mt-2">OTP expires in: <span class="countdown" id="otpCountdown">05:00</span></div>
-                        </div>
-                        <button type="button" class="btn btn-yellow w-100" id="verifyOtpBtn">Verify OTP</button>
-                        <button type="button" class="btn btn-outline-secondary w-100 mt-2" id="resendOtpBtn">Resend OTP</button>
-                    </div>
-                    
-                    <div class="text-center mt-3">
-                        <p class="mb-0">Already have an account? <a href="#" class="text-decoration-none">Login</a></p>
-                    </div>
-                </div>
-            </div>
+    <!-- Popular CA Tests -->
+    <section>
+      <h2 class="english">Popular CA Test Series</h2><h2 class="hindi">लोकप्रिय CA टेस्ट सीरीज़</h2>
+      <div class="test-grid">
+        <div class="test-item english">
+          <h3>CA Foundation 2025</h3>
+          <p>100+ Questions on Accounting & Laws (ICAI Syllabus)</p>
+          <a href="individual-test.html">Take CA Test</a>
         </div>
+        <div class="test-item hindi">
+          <h3>CA फाउंडेशन 2025</h3>
+          <p>अकाउंटिंग और लॉ पर 100+ प्रश्न (ICAI सिलेबस)</p>
+          <a href="individual-test.html">CA टेस्ट दें</a>
+        </div>
+        <!-- Add more: Intermediate, Final -->
+        <div class="test-item">
+          <h3>CA Intermediate Group 1</h3>
+          <p>Advanced Accounting & Cost Mock</p>
+          <a href="test-category.html">Explore</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Login Modal (Same Structure) -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>CA Student Login/Register</h2>
+      <form>
+        <input type="email" placeholder="CA Student Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Access Dashboard</button>
+      </form>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Google Apps Script URL - इसे अपने deployed web app के URL से replace करें
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw1OO4Xq2pDS_uBxj1KMNfJakhW_RC9nXKl-bWv_cRi9u41Q4IA6VEZuFDw1Gw7fHkoWg/exec';
-        let debugMode = true;
-        
-        // Show alert function
-        function showAlert(message, type = 'success') {
-            const alertSection = document.querySelector('.alert-section');
-            const alert = document.createElement('div');
-            alert.className = `alert alert-${type} alert-dismissible fade show`;
-            alert.innerHTML = `
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
-            alertSection.appendChild(alert);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                alert.remove();
-            }, 5000);
-        }
-        
-        // Update debug info
-        function updateDebugInfo(message) {
-            if (debugMode) {
-                document.getElementById('debugInfo').innerHTML = message;
-                console.log(message);
-            }
-        }
-        
-        // Toggle debug mode
-        function toggleDebug() {
-            debugMode = !debugMode;
-            document.querySelector('.debug-panel').style.display = debugMode ? 'block' : 'none';
-            updateDebugInfo('Debug mode: ' + (debugMode ? 'ON' : 'OFF'));
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            updateDebugInfo('Page loaded successfully');
-            
-            // Registration Form Handling
-            const registrationForm = document.getElementById('registrationForm');
-            const otpSection = document.getElementById('otpSection');
-            const verifyOtpBtn = document.getElementById('verifyOtpBtn');
-            const resendOtpBtn = document.getElementById('resendOtpBtn');
-            const otpCountdown = document.getElementById('otpCountdown');
-            
-            let otpTimer;
-            let userData = {};
-            let currentOtp = ''; // For debugging
-            
-            // Test Google Apps Script connection
-            fetch(scriptURL + '?test=true')
-                .then(response => response.json())
-                .then(data => {
-                    updateDebugInfo('API Connection: Successful');
-                })
-                .catch(error => {
-                    updateDebugInfo('API Connection: Failed - ' + error.message);
-                    showAlert('Could not connect to server. Please check your internet connection.', 'danger');
-                });
-            
-            // Registration form submission
-            registrationForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                userData = {
-                    name: document.getElementById('fullName').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    course: document.getElementById('course').value,
-                    password: document.getElementById('password').value,
-                    timestamp: new Date().toISOString()
-                };
-                
-                updateDebugInfo('Sending registration data: ' + JSON.stringify(userData));
-                
-                try {
-                    // Show loading state
-                    const submitBtn = registrationForm.querySelector('button[type="submit"]');
-                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
-                    submitBtn.disabled = true;
-                    
-                    // Send data to Google Sheets
-                    const response = await fetch(scriptURL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain;charset=utf-8',
-                        },
-                        body: JSON.stringify({
-                            action: 'register',
-                            data: userData
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    updateDebugInfo('Server response: ' + JSON.stringify(result));
-                    
-                    if (result.status === 'success') {
-                        // Show OTP section
-                        registrationForm.style.display = 'none';
-                        otpSection.style.display = 'block';
-                        
-                        // For debugging, show the OTP
-                        if (result.otp) {
-                            currentOtp = result.otp;
-                            updateDebugInfo('OTP generated: ' + currentOtp);
-                            showAlert('OTP for testing: ' + currentOtp, 'info');
-                        }
-                        
-                        // Start OTP countdown
-                        startOtpCountdown();
-                        
-                        showAlert('OTP sent to your email successfully!', 'success');
-                    } else {
-                        showAlert('Registration failed: ' + result.message, 'danger');
-                    }
-                } catch (error) {
-                    console.error('Error!', error.message);
-                    updateDebugInfo('Error: ' + error.message);
-                    showAlert('An error occurred. Please try again.', 'danger');
-                } finally {
-                    // Reset button state
-                    const submitBtn = registrationForm.querySelector('button[type="submit"]');
-                    submitBtn.innerHTML = 'Register';
-                    submitBtn.disabled = false;
-                }
-            });
-            
-            // Verify OTP
-            verifyOtpBtn.addEventListener('click', async function() {
-                const otp = document.getElementById('otpInput').value;
-                updateDebugInfo('Verifying OTP: ' + otp);
-                
-                if (!otp || otp.length !== 6) {
-                    showAlert('Please enter a valid 6-digit OTP', 'warning');
-                    return;
-                }
-                
-                try {
-                    // Show loading state
-                    verifyOtpBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Verifying...';
-                    verifyOtpBtn.disabled = true;
-                    
-                    const response = await fetch(scriptURL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain;charset=utf-8',
-                        },
-                        body: JSON.stringify({
-                            action: 'verify_otp',
-                            email: userData.email,
-                            otp: otp
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    updateDebugInfo('OTP verification response: ' + JSON.stringify(result));
-                    
-                    if (result.status === 'success') {
-                        clearInterval(otpTimer);
-                        showAlert('Registration successful! You can now login.', 'success');
-                        
-                        // Close modal after 2 seconds
-                        setTimeout(() => {
-                            const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-                            modal.hide();
-                            window.location.reload();
-                        }, 2000);
-                    } else {
-                        showAlert('OTP verification failed: ' + result.message, 'danger');
-                    }
-                } catch (error) {
-                    console.error('Error!', error.message);
-                    updateDebugInfo('Error: ' + error.message);
-                    showAlert('An error occurred. Please try again.', 'danger');
-                } finally {
-                    // Reset button state
-                    verifyOtpBtn.innerHTML = 'Verify OTP';
-                    verifyOtpBtn.disabled = false;
-                }
-            });
-            
-            // Resend OTP
-            resendOtpBtn.addEventListener('click', async function() {
-                try {
-                    // Show loading state
-                    resendOtpBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
-                    resendOtpBtn.disabled = true;
-                    
-                    const response = await fetch(scriptURL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain;charset=utf-8',
-                        },
-                        body: JSON.stringify({
-                            action: 'resend_otp',
-                            email: userData.email
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    updateDebugInfo('Resend OTP response: ' + JSON.stringify(result));
-                    
-                    if (result.status === 'success') {
-                        // For debugging, show the OTP
-                        if (result.otp) {
-                            currentOtp = result.otp;
-                            updateDebugInfo('New OTP generated: ' + currentOtp);
-                            showAlert('New OTP for testing: ' + currentOtp, 'info');
-                        }
-                        
-                        showAlert('New OTP sent to your email', 'success');
-                        startOtpCountdown();
-                    } else {
-                        showAlert('Failed to resend OTP: ' + result.message, 'danger');
-                    }
-                } catch (error) {
-                    console.error('Error!', error.message);
-                    updateDebugInfo('Error: ' + error.message);
-                    showAlert('An error occurred. Please try again.', 'danger');
-                } finally {
-                    // Reset button state
-                    resendOtpBtn.innerHTML = 'Resend OTP';
-                    resendOtpBtn.disabled = false;
-                }
-            });
-            
-            // OTP Countdown Timer
-            function startOtpCountdown() {
-                let timeLeft = 300; // 5 minutes
-                
-                clearInterval(otpTimer);
-                updateCountdownDisplay(timeLeft);
-                
-                otpTimer = setInterval(() => {
-                    timeLeft--;
-                    
-                    if (timeLeft <= 0) {
-                        clearInterval(otpTimer);
-                        showAlert('OTP has expired. Please request a new one.', 'warning');
-                        return;
-                    }
-                    
-                    updateCountdownDisplay(timeLeft);
-                }, 1000);
-            }
-            
-            function updateCountdownDisplay(timeLeft) {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                otpCountdown.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
-        });
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://s7.addthis.com/js/300/addthis_widget.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
